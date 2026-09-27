@@ -27,8 +27,8 @@ submits it and reports success only after the token transfer itself succeeds.
 | | Agent (payer) | API owner (merchant) |
 | --- | --- | --- |
 | Account | NEAR account with a full-access key | NEAR account registered with USDC |
-| Funds | USDC only, no NEAR | NEAR to fund the relayer's gas |
-| Software | `@fastnear/x402` client | x402 middleware + a facilitator (self-hosted, or a reference instance with an approved API key) |
+| Funds | USDC only, no NEAR | Self-hosted facilitator: NEAR to fund its relayer's gas. Hosted facilitator: none, the operator funds the relayer |
+| Software | `@fastnear/x402` client | x402 middleware, plus either a self-hosted facilitator or an approved API key for a hosted one |
 
 ## Limits to plan around
 
@@ -38,8 +38,8 @@ submits it and reports success only after the token transfer itself succeeds.
   That is a good guardrail, but larger purchases need explicit limits.
 - **Browsers.** Wallet support for signing these payments is not ready.
   Server-side agents are the practical path today.
-- **Scope.** One exact price per request, in USDC. No subscriptions, refunds,
-  or variable pricing in the protocol.
+- **Pricing.** The `exact` scheme on NEAR charges one fixed USDC price per
+  request.
 - **Paying without a NEAR account** (for example with an EVM key through NEAR
   Intents) is specified but not yet supported by the facilitator.
 
